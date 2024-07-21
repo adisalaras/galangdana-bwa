@@ -30,9 +30,11 @@
                     </x-nav-link>
                     @endrole
 
+                    @role('fundraiser|owner')
                     <x-nav-link :href="route('admin.fundraisings.index')" :active="request()->routeIs('admin.fundraisings.index')">
                         {{ __('Fundraisings') }}
                     </x-nav-link>
+                    @endrole
 
                     <x-nav-link :href="route('admin.fundraisers.index')" :active="request()->routeIs('admin.fundraisers.index')">
                         {{ __('Fundraisers') }}
