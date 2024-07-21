@@ -32,12 +32,18 @@ class RegisteredUserController extends Controller
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'password' => ['required', 'confirmed', 
+            'avatar' => ['sometimes', 'image', 'mimes:png,jpg,jpeg'],Rules\Password::defaults()],
         ]);
 
+        if($request->hasFile('avatar')){ //cek apakah view mengirim avatar?
+            $avatarPath= $request->file('avatar')->store('avatars', 'public'); //menerjemahkan menjadi alamat
+            
+        }
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
+            'avatar' => $avatarPath,
             'password' => Hash::make($request->password),
         ]);
 
