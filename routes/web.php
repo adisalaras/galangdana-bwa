@@ -30,9 +30,9 @@ Route::middleware('auth')->group(function () {
 
         Route::resource('donaturs', DonaturController::class)->middleware('role:owner');
 
-        Route::resource('Fundraisers', FundraiserController::class)->middleware('role:owner')->except('index');
+        Route::resource('fundraisers', FundraiserController::class)->middleware('role:owner')->except('index');
 
-        Route::get('Fundraisers', [FundraiserController::class, 'index'])->name('fundraisers.index'); //yang ada di dashboard bisa mengakses index
+        Route::get('Fundraisers', [FundraiserController::class, 'index'])->name('fundraisers.index'); 
 
         Route::resource('fundraishing_widrawals', FundraishingWidrawalController::class)->middleware('role:owner|fundraiser');
 
