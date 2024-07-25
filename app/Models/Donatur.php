@@ -12,12 +12,11 @@ class Donatur extends Model
 
     protected $fillable = [
         'name',
-        'phone_number',
+        'notes',
         'fundraising_id',
         'total_amount',
-        'notes',
-        'proof',
         'is_paid',
+        'proof',
     ];
     public function fundraising(){ //donasi 
         return $this->belongsTo(Fundraising::class);

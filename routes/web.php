@@ -7,8 +7,11 @@ use App\Http\Controllers\FundraiserController;
 use App\Http\Controllers\FundraishingPhaseController;
 use App\Http\Controllers\FundraishingWidrawalController;
 use App\Http\Controllers\FundraisingController;
+use App\Http\Controllers\FundraisingPhaseController;
+use App\Http\Controllers\FundraisingWithdrawalController;
 use App\Http\Controllers\ProfileController;
 use App\Models\Fundraiser;
+use App\Models\FundraisingWithdrawal;
 use GuzzleHttp\Middleware;
 use Illuminate\Support\Facades\Route;
 
@@ -34,17 +37,17 @@ Route::middleware('auth')->group(function () {
 
         Route::get('Fundraisers', [FundraiserController::class, 'index'])->name('fundraisers.index'); 
 
-        Route::resource('fundraishing_widrawals', FundraishingWidrawalController::class)->middleware('role:owner|fundraiser');
+        Route::resource('fundraishing_widrawals', FundraisingWithdrawalController::class)->middleware('role:owner|fundraiser');
 
         Route::post('/fundraising_withdrawals/request/{fundraising}', 
-        [FundraishingWidrawalController::class, 'store'])
+        [FundraisingWithdrawalController::class, 'store'])
         ->middleware('role:fundraiser')
         ->name('fundraising_withdrawals.store');
 
-        Route::resource('fundraishing_phases', FundraishingPhaseController::class)->middleware('role:owner|fundraiser');
+        Route::resource('fundraishing_phases', FundraisingPhaseController::class)->middleware('role:owner|fundraiser');
 
         Route::post('/fundraising_phases/request/{fundraising}', 
-        [FundraishingPhaseController::class, 'store'])
+        [FundraisingPhaseController::class, 'store'])
         ->middleware('role:fundraiser')
         ->name('fundraising_phases.store');
 

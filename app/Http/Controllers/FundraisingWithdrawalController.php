@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\FundraishingPhase;
+use App\Models\FundraisingWithdrawal;
 use Illuminate\Http\Request;
 
-class FundraishingPhaseController extends Controller
+class FundraisingWithdrawalController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -34,7 +34,7 @@ class FundraishingPhaseController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(FundraishingPhase $fundraishingPhase)
+    public function show(FundraisingWithdrawal $fundraisingWithdrawal)
     {
         //
     }
@@ -42,7 +42,7 @@ class FundraishingPhaseController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(FundraishingPhase $fundraishingPhase)
+    public function edit(FundraisingWithdrawal $fundraisingWithdrawal)
     {
         //
     }
@@ -50,7 +50,7 @@ class FundraishingPhaseController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, FundraishingPhase $fundraishingPhase)
+    public function update(Request $request, FundraisingWithdrawal $fundraisingWithdrawal)
     {
         //
     }
@@ -58,7 +58,7 @@ class FundraishingPhaseController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(FundraishingPhase $fundraishingPhase)
+    public function destroy(FundraisingWithdrawal $fundraisingWithdrawal)
     {
         //
     }

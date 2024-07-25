@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class FundraishingWidrawal extends Model
+class FundraisingWithdrawal extends Model
 {
     use HasFactory, SoftDeletes;
 
@@ -18,7 +18,7 @@ class FundraishingWidrawal extends Model
         'amount_requested',
         'amount_received',
         'has_received',
-        'has_set',
+        'has_sent',
         'fundraising_id',
         'fundraiser_id',
     ];

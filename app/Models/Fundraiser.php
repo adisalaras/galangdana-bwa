@@ -17,11 +17,5 @@ class Fundraiser extends Model
 
     public function user(){
         return $this->belongsTo(User::class);
-    } //one fundraiser to user
-    // public function fundraishings(){
-    //     return $this->hasMany(Fundraising::class);
-    // } ga pake ini
-    // public function fundraishing_widrawals(){
-    //     return $this->hasMany(FundraishingWidrawal::class);
-    // } ga pake ini
+    } 
 }

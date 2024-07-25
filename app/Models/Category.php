@@ -16,7 +16,7 @@ class Category extends Model
         'icon',
     ];
 
-    public function fundraisings(){ //punya banyak fundraising
+    public function fundraisings(){ 
         return $this->hasMany(Fundraising::class);
     }
 }

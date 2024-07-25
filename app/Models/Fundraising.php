@@ -12,13 +12,13 @@ class Fundraising extends Model
     protected $fillable = [
         'name',
         'slug',
-        'target_amount',
-        'about',
-        'thumbnail',
-        'is_active',
-        'has_finished',
         'fundraiser_id',
         'category_id',
+        'thumbnail',
+        'about',
+        'has_finished',
+        'is_active',
+        'target_amount',
     ];
     public function category(){
         return $this->belongsTo(Category::class);
@@ -34,7 +34,7 @@ class Fundraising extends Model
         return $this->donaturs()->sum('total_amount');
     }
     public function widrawals(){
-        return $this->hasMany(FundraishingWidrawal::class);
+        return $this->hasMany(FundraisingWithdrawal::class);
     }
     
 
