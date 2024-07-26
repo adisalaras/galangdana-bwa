@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreFundrasingRequest;
+use App\Http\Requests\UpdateFundrasingRequest;
 use App\Models\Category;
 use App\Models\Fundraiser;
 use App\Models\Fundraising;
@@ -87,7 +88,8 @@ class FundraisingController extends Controller
      */
     public function edit(Fundraising $fundraising)
     {
-        //
+        $categories = Category::all();
+        return view('admin.fundraisings.edit', compact('fundraising', 'categories'));
     }
 
     public function activate_fundraising(){
@@ -97,9 +99,20 @@ class FundraisingController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Fundraising $fundraising)
+    public function update(UpdateFundrasingRequest $request, Fundraising $fundraising)
     {
-        //
+        DB::transaction(function() use ($request, $fundraising){ 
+            $validated = $request->validated();
+
+            if($request->hasFile('thumbnail')){ //cek apakah view mengirim thumbnail?
+                $thumbnailPath= $request->file('thumbnail')->store('thumbnails', 'public'); //menerjemahkan menjadi alamat
+                $validated['thumbnail']= $thumbnailPath; //storage/thumbnails/...png
+            }
+            $validated['slug']= Str::slug($validated['name']);
+            $fundraising->update($validated);
+        });
+
+        return redirect()->route('admin.fundraisings.show', $fundraising);
     }
 
     /**
@@ -107,6 +120,16 @@ class FundraisingController extends Controller
      */
     public function destroy(Fundraising $fundraising)
     {
-        //
+        DB::beginTransaction();
+
+        try{
+            $fundraising->delete();
+            DB::commit(); //give information data ter-update ke database
+
+            return redirect()->route('admin.fundraisings.index');
+        }catch(\Exception $e){
+            DB::rollBack();
+            return redirect()->route('admin.fundraisings.index');
+        }
     }
 }
