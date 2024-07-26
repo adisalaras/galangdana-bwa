@@ -16,7 +16,7 @@
                 @forelse($fundraisings as $fundraising)
                 <div class="item-card flex flex-col md:flex-row gap-y-10 justify-between md:items-center">
                     <div class="flex flex-row items-center gap-x-3">
-                        <img src="{{ Storage::url($fundraising->thumbnail) }}" alt="" class="rounded-2xl object-cover w-[120px] h-[90px]">
+                        <img src="{{ Storage::url($fundraising->thumbnail) }}" alt="" class="rounded-2xl object-cover w-[90px] h-[90px]">
                         <div class="flex flex-col">
                             <h3 class="text-indigo-950 text-xl font-bold">{{ $fundraising->name }}</h3>
                             <p class="text-slate-500 text-sm">{{ $fundraising->category->name }}</p>
