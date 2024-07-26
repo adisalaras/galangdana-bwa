@@ -37,7 +37,7 @@ Route::middleware('auth')->group(function () {
 
         Route::get('Fundraisers', [FundraiserController::class, 'index'])->name('fundraisers.index'); 
 
-        Route::resource('fundraishing_widrawals', FundraisingWithdrawalController::class)->middleware('role:owner|fundraiser');
+        Route::resource('fundraising_withdrawals', FundraisingWithdrawalController::class)->middleware('role:owner|fundraiser');
 
         Route::post('/fundraising_withdrawals/request/{fundraising}', 
         [FundraisingWithdrawalController::class, 'store'])
@@ -58,6 +58,7 @@ Route::middleware('auth')->group(function () {
         Route::post('/fundraiser/apply', [DashboardController::class, 'apply_fundraiser'])->name('fundraiser.apply');
 
         Route::get('/my_withdrawals', [DashboardController::class, 'my_withdrawals'])->name('my_withdrawals');
+
         Route::get('/my_withdrawals/detail/{fundraisingwithdrawal}', [DashboardController::class, 'my_withdrawals'])->name('my-withdrawals.details');
     });
 });

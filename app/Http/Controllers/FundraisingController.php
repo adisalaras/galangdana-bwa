@@ -72,6 +72,7 @@ class FundraisingController extends Controller
      */
     public function show(Fundraising $fundraising)
     {
+        $hasRequestWithdrawal = $fundraising->widrawals()->exists();
         $totalDonations= $fundraising->totalReachedAmount();
         $goalReached = $totalDonations >= $fundraising->target_amount; //cek donasi apakah sudah terkumpul
         $percentage = ($totalDonations/ $fundraising->target_amount) *100;
@@ -80,7 +81,7 @@ class FundraisingController extends Controller
             $percentage  = 100;
         }
 
-        return view('admin.fundraisings.show', compact('fundraising', 'goalReached', 'percentage', 'totalDonations'));
+        return view('admin.fundraisings.show', compact('fundraising', 'goalReached', 'percentage', 'totalDonations', 'hasRequestWithdrawal'));
     }
 
     /**

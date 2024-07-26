@@ -18,7 +18,7 @@ class FundraisingWithdrawal extends Model
         'amount_requested',
         'amount_received',
         'has_received',
-        'has_sent',
+        'has_set',
         'fundraising_id',
         'fundraiser_id',
     ];

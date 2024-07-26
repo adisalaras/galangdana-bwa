@@ -23,4 +23,9 @@ class DashboardController extends Controller
 
         return redirect()->route('admin.fundraisers.index');
     }
+
+    public function my_withdrawals()
+    {
+
+    }
 }

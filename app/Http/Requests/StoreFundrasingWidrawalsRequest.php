@@ -22,9 +22,9 @@ class StoreFundrasingWidrawalsRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'bank_name' => ['required', 'string','max:255'],
-            'bank_account_name' => ['required', 'string','max:255'],
-            'bank_account_number' => ['required', 'string','max:255'],
+            'bank_name' => 'required|string|max:255',
+            'bank_account_name' => 'required|string|max:255',
+            'bank_account_number' => 'required|string|max:255',
         ];
     }
 }
