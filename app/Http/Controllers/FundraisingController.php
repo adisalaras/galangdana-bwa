@@ -71,7 +71,15 @@ class FundraisingController extends Controller
      */
     public function show(Fundraising $fundraising)
     {
-        //
+        $totalDonations= $fundraising->totalReachedAmount();
+        $goalReached = $totalDonations >= $fundraising->target_amount; //cek donasi apakah sudah terkumpul
+        $percentage = ($totalDonations/ $fundraising->target_amount) *100;
+
+        if($percentage > 100){
+            $percentage  = 100;
+        }
+
+        return view('admin.fundraisings.show', compact('fundraising', 'goalReached', 'percentage', 'totalDonations'));
     }
 
     /**
