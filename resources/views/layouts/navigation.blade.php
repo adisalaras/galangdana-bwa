@@ -25,7 +25,7 @@
                         {{ __('Donaturs') }}
                     </x-nav-link>
                     
-                    <x-nav-link :href="route('admin.fundraishing_widrawals.index')" :active="request()->routeIs('admin.fundraishing_widrawals.index')">
+                    <x-nav-link :href="route('admin.fundraising_withdrawals.index')" :active="request()->routeIs('admin.fundraishing_widrawals.index')">
                         {{ __('Withdrawals') }}
                     </x-nav-link>
                     @endrole
