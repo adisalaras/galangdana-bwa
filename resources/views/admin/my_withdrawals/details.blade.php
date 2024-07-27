@@ -22,7 +22,7 @@
                     <div class="flex flex-col gap-y-10">    
                         <div>
                             <p class="text-slate-500 text-sm">Total Amount</p>
-                            <h3 class="text-indigo-950 text-xl font-bold">Rp 183409</h3>
+                            <h3 class="text-indigo-950 text-xl font-bold">Rp {{ number_format($fundraisingWithdrawal->amount_requested, 0, ',','.') }}</h3>
                         </div>
                     @if($fundraisingWithdrawal->has_set)
                         @if($fundraisingWithdrawal->has_received)
@@ -42,7 +42,7 @@
                     
                         <div>
                             <p class="text-slate-500 text-sm">Date</p>
-                            <h3 class="text-indigo-950 text-xl font-bold">12 Jan 2024</h3>
+                            <h3 class="text-indigo-950 text-xl font-bold">{{ $fundraisingWithdrawal->created_at }}</h3>
                         </div>
                     </div>
                     <div>
@@ -62,11 +62,11 @@
                         </div>
                         <div>
                             <p class="text-slate-500 text-sm">No Account</p>
-                            <h3 class="text-indigo-950 text-xl font-bold">{{ $fundraisingWithdrawal->bank_name }}</h3>
+                            <h3 class="text-indigo-950 text-xl font-bold">{{ $fundraisingWithdrawal->bank_account_number }}</h3>
                         </div>
                         <div>
                             <p class="text-slate-500 text-sm">Account Name</p>
-                            <h3 class="text-indigo-950 text-xl font-bold">{{ $fundraisingWithdrawal->bank_account_name }}</h3>
+                            <h3 class="text-indigo-950 text-xl font-bold">{{ $fundraisingWithdrawal->bank_name }}</h3>
                         </div>
                         
                     </div>
@@ -77,7 +77,7 @@
                     <hr class="my-5">
                     @if (!$fundraisingWithdrawal->has_received)
                     <h3 class="text-indigo-950 text-xl font-bold">Uang sudah ditransfer</h3>
-                    <form action="{{ route('admin.fundraising_phase.store', $fundraisingWithdrawal) }}" method="POST">
+                    <form action="#" method="POST">
                         @csrf
                         <div>
                             <x-input-label for="name" :value="__('Name')" />
@@ -95,7 +95,7 @@
                             <x-input-error :messages="$errors->get('photo')" class="mt-2" />
                         </div>
                         <button type="submit" class="font-bold py-4 px-6 bg-indigo-700 text-white rounded-full">
-                            Update Donation
+                            Send Withdraw
                         </button>
                     </form>
                     @endif

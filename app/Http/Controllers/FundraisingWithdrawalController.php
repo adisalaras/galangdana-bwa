@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreFundrasingWidrawalsRequest;
+use App\Http\Requests\UpdateFundrasingWidrawalsRequest;
 use App\Models\Fundraising;
 use App\Models\FundraisingWithdrawal;
 use Illuminate\Http\Request;
@@ -16,7 +17,8 @@ class FundraisingWithdrawalController extends Controller
      */
     public function index()
     {
-        //
+        $fundraising_withdrawals = FundraisingWithdrawal::orderByDesc('id')->get();
+        return view('admin.fundraising_withdrawals.index', compact('fundraising_withdrawals'));
     }
 
     /**
@@ -59,7 +61,7 @@ class FundraisingWithdrawalController extends Controller
      */
     public function show(FundraisingWithdrawal $fundraisingWithdrawal)
     {
-        //
+        return view('admin.fundraising_withdrawals.show', compact('fundraisingWithdrawal'));
     }
 
     /**
@@ -73,9 +75,21 @@ class FundraisingWithdrawalController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, FundraisingWithdrawal $fundraisingWithdrawal)
+    public function update(UpdateFundrasingWidrawalsRequest $request, FundraisingWithdrawal $fundraisingWithdrawal)
     {
-        //
+        DB::transaction(function() use ($request, $fundraisingWithdrawal){
+            $validated = $request->validated();
+
+            if($request->hasFile('proof')){
+                $proofPath = $request->file('proof')->store('proofs', 'public');
+                $validated['proof']= $proofPath;
+
+            }
+            $validated['has_set']=1;
+
+            $fundraisingWithdrawal->update($validated);
+        });
+        return redirect()->route('admin.fundraising_withdrawals.show', $fundraisingWithdrawal);
     }
 
     /**

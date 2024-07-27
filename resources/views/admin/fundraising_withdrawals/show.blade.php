@@ -22,27 +22,36 @@
                     <div class="flex flex-col gap-y-10">    
                         <div>
                             <p class="text-slate-500 text-sm">Total Amount</p>
-                            <h3 class="text-indigo-950 text-xl font-bold">Rp 183409</h3>
+                            <h3 class="text-indigo-950 text-xl font-bold">Rp {{ number_format($fundraisingWithdrawal->amount_requested, 0, ',','.') }}</h3>
                         </div>
+                        @if($fundraisingWithdrawal->has_set)
+                        @if($fundraisingWithdrawal->has_received)
                         <span class="w-fit text-sm font-bold py-2 px-3 rounded-full bg-green-500 text-white">
-                            SUCCESS
+                            DELIVERED
                         </span>
-                        <span class="w-fit text-sm font-bold py-2 px-3 rounded-full bg-orange-500 text-white">
-                            PENDING
-                        </span> 
+                        @else
+                        <span class="w-fit text-sm font-bold py-2 px-3 rounded-full bg-indigo-500 text-white">
+                            PROCESSING
+                        </span>
+                        @endif
+                    @else
+                    <span class="w-fit text-sm font-bold py-2 px-3 rounded-full bg-orange-500 text-white">
+                        PENDING
+                    </span> 
+                    @endif
                         <div>
                             <p class="text-slate-500 text-sm">Date</p>
-                            <h3 class="text-indigo-950 text-xl font-bold">12 Jan 2024</h3>
+                            <h3 class="text-indigo-950 text-xl font-bold">{{ $fundraisingWithdrawal->created_at }}</h3>
                         </div>
                         <div class="">
                             <p class="text-slate-500 text-sm">Fundraiser</p>
-                            <h3 class="text-indigo-950 text-xl font-bold">Annima Poppo</h3>
+                            <h3 class="text-indigo-950 text-xl font-bold">{{ $fundraisingWithdrawal->fundraiser->user->name }}</h3>
                         </div>
                     </div>
                     <div>
-                        <img src="https://images.unsplash.com/photo-1611174797136-5e167ea90d6c?q=80&w=3120&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="" class="rounded-2xl object-cover w-[300px] h-[200px] mb-3">
-                        <h3 class="text-indigo-950 text-xl font-bold">Kebakaran Hutan</h3>
-                        <p class="text-slate-500 text-sm">Rp 38940909</p>
+                        <img src="{{ Storage::url($fundraisingWithdrawal->fundraising->thumbnail) }}" alt="" class="rounded-2xl object-cover w-[300px] h-[200px] mb-3">
+                        <h3 class="text-indigo-950 text-xl font-bold">{{ $fundraisingWithdrawal->fundraising->name }}</h3>
+                        <p class="text-slate-500 text-sm">Rp. {{ number_format($fundraisingWithdrawal->fundraising->target_amount, 0, ',','.') }}</p>
                     </div>
                 </div>
                 <hr class="my-5">
@@ -50,26 +59,26 @@
                 <div class="flex flex-row gap-x-10">    
                     <div>
                         <p class="text-slate-500 text-sm">Bank</p>
-                        <h3 class="text-indigo-950 text-xl font-bold">Angga Capital</h3>
+                        <h3 class="text-indigo-950 text-xl font-bold">{{ $fundraisingWithdrawal->bank_account_name }}</h3>
                     </div>
                     <div>
                         <p class="text-slate-500 text-sm">No Account</p>
-                        <h3 class="text-indigo-950 text-xl font-bold">08123092093</h3>
+                        <h3 class="text-indigo-950 text-xl font-bold">{{ $fundraisingWithdrawal->bank_account_number }}</h3>
                     </div>
                     <div>
                         <p class="text-slate-500 text-sm">Account Name</p>
-                        <h3 class="text-indigo-950 text-xl font-bold">Indonesia Berbagi</h3>
+                        <h3 class="text-indigo-950 text-xl font-bold">{{ $fundraisingWithdrawal->bank_name }}</h3>
                     </div>
-                    <div>
-                        <p class="text-slate-500 text-sm">SWIFT Code</p>
-                        <h3 class="text-indigo-950 text-xl font-bold">ANCAP</h3>
-                    </div>
+                    
                 </div>
+
                 <hr class="my-5">
+                @if($fundraisingWithdrawal->has_set)
                 <h3 class="text-indigo-950 text-xl font-bold mb-5">Already Proccessed</h3>
                 <img src="https://i.pinimg.com/236x/68/ed/dc/68eddcea02ceb29abde1b1c752fa29eb.jpg" alt="" class="rounded-2xl object-cover w-[300px] h-[200px] mb-3">
+                @else
                 <hr class="my-5">
-                <form action="#" method="POST">
+                <form action="{{ route('admin.fundraising_withdrawals.update', $fundraisingWithdrawal) }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
                     <div class="mt-4 w-fit">
@@ -81,6 +90,7 @@
                         Confirm Withdrawal
                     </button>
                 </form>
+                @endif
             </div>
         </div>
     </div>
