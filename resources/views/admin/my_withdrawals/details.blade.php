@@ -71,13 +71,13 @@
                         
                     </div>
                     <hr class="my-5">
-                    <h3 class="text-indigo-950 text-xl font-bold mb-5">Already Proccessed</h3> 
+                    <h3 class="text-indigo-950 text-xl font-bold mb-5">Uang sudah di transfer</h3> 
                     {{-- di acc oleh super admin --}}
                     <img src="{{ Storage::url($fundraisingWithdrawal->proof) }}" alt="" class="rounded-2xl object-cover w-[300px] h-[200px] mb-3">
                     <hr class="my-5">
                     @if (!$fundraisingWithdrawal->has_received)
-                    <h3 class="text-indigo-950 text-xl font-bold">Uang sudah ditransfer</h3>
-                    <form action="#" method="POST">
+                    <h3 class="text-indigo-950 text-xl font-bold">Apakah uang sudah disalurkan?</h3>
+                    <form action="{{ route('admin.fundraising_phases.store', $fundraisingWithdrawal->fundraising_id) }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div>
                             <x-input-label for="name" :value="__('Name')" />
@@ -95,7 +95,7 @@
                             <x-input-error :messages="$errors->get('photo')" class="mt-2" />
                         </div>
                         <button type="submit" class="font-bold py-4 px-6 bg-indigo-700 text-white rounded-full">
-                            Send Withdraw
+                            Update Donation
                         </button>
                     </form>
                     @endif
