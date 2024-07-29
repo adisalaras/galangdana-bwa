@@ -9,13 +9,13 @@
     <div class="header flex flex-col bg-[#56BBC5] rounded-b-[50px] overflow-hidden h-[320px] bg-gradient-to-b from-[#3CBBDB] to-[#EAD380] -mb-[181px]">
         <nav class="pt-5 px-3 flex justify-between items-center">
             <div class="flex items-center gap-[10px]">
-                <a href="index.html" class="w-10 h-10 flex shrink-0">
-                    <img src="assets/images/icons/back.svg" alt="icon">
+                <a href="{{ route('front.index') }}" class="w-10 h-10 flex shrink-0">
+                    <img src="{{ asset('assets/images/icons/back.svg') }}" alt="icon">
                 </a>
             </div>
             <p class="font-semibold text-sm text-white">Browse Fundraisings</p>
             <a href="" class="w-10 h-10 flex shrink-0">
-                <img src="assets/images/icons/menu-dot.svg" alt="icon">
+                <img src="{{ asset('assets/images/icons/menu-dot.svg') }}" alt="icon">
             </a>
         </nav>
         <div class="mt-5">
@@ -23,142 +23,28 @@
         </div>
     </div>
     <div class="flex flex-col gap-4 px-4">
-        <a href="details.html" class="card">
+        @forelse($category->fundraisings as $fundraising)
+        <a href="{{ route('front.details', $fundraising) }}" class="card">
             <div class="w-full flex items-center p-[14px] gap-3 rounded-2xl bg-white">
                 <div class="w-20 h-[90px] flex shrink-0 rounded-2xl overflow-hidden">
-                    <img src="assets/images/thumbnails/th5.png" class="w-full h-full object-cover" alt="thumbnail">
+                    <img src="{{ Storage::url($fundraising->thumbnail) }}" class="w-full h-full object-cover" alt="thumbnail">
                 </div>
                 <div class="flex flex-col gap-1">
-                    <p class="font-bold line-clamp-1 hover:line-clamp-none">Operasi Ginjal Kanan</p>
-                    <p class="text-xs leading-[18px]">Target <span class="font-bold text-[#FF7815]">Rp 55.000.000</span></p>
+                    <p class="font-bold line-clamp-1 hover:line-clamp-none">{{ $fundraising->name }}</p>
+                    <p class="text-xs leading-[18px]">Target <span class="font-bold text-[#FF7815]">Rp {{ number_format ($fundraising->target_amount, 0, '.',',') }}</span></p>
                     <div class="flex items-center gap-1 sm:flex-row-reverse sm:justify-end">
-                        <p class="font-semibold sm:font-medium text-xs leading-[18px]">Putra Bangsa</p>
+                        <p class="font-semibold sm:font-medium text-xs leading-[18px]">{{ $fundraising->fundraiser->user->name }}</p>
                         <div class="flex shrink-0">
-                            <img src="assets/images/icons/tick-circle.svg" alt="icon">
+                            <img src="{{ asset('assets/images/icons/tick-circle.svg') }}" alt="icon">
                         </div>
                     </div>
                 </div>
             </div>
         </a>
-        <a href="details.html" class="card">
-            <div class="w-full flex items-center p-[14px] gap-3 rounded-2xl bg-white">
-                <div class="w-20 h-[90px] flex shrink-0 rounded-2xl overflow-hidden">
-                    <img src="assets/images/thumbnails/th7.png" class="w-full h-full object-cover" alt="thumbnail">
-                </div>
-                <div class="flex flex-col gap-1">
-                    <p class="font-bold line-clamp-1 hover:line-clamp-none">Buku Edukasi Peduli Anak lorem ipsum</p>
-                    <p class="text-xs leading-[18px]">Target <span class="font-bold text-[#FF7815]">Rp 800.000.000</span></p>
-                    <div class="flex items-center gap-1 sm:flex-row-reverse sm:justify-end">
-                        <p class="font-semibold sm:font-medium text-xs leading-[18px]">Putra Bangsa</p>
-                        <div class="flex shrink-0">
-                            <img src="assets/images/icons/tick-circle.svg" alt="icon">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </a>
-        <a href="details.html" class="card">
-            <div class="w-full flex items-center p-[14px] gap-3 rounded-2xl bg-white">
-                <div class="w-20 h-[90px] flex shrink-0 rounded-2xl overflow-hidden">
-                    <img src="assets/images/thumbnails/th4.png" class="w-full h-full object-cover" alt="thumbnail">
-                </div>
-                <div class="flex flex-col gap-1">
-                    <p class="font-bold line-clamp-1 hover:line-clamp-none">Bangun Desa Angga</p>
-                    <p class="text-xs leading-[18px]">Target <span class="font-bold text-[#FF7815]">Rp 18.500.000.000</span></p>
-                    <div class="flex items-center gap-1 sm:flex-row-reverse sm:justify-end">
-                        <p class="font-semibold sm:font-medium text-xs leading-[18px]">Putra Bangsa</p>
-                        <div class="flex shrink-0">
-                            <img src="assets/images/icons/tick-circle.svg" alt="icon">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </a>
-        <a href="details.html" class="card">
-            <div class="w-full flex items-center p-[14px] gap-3 rounded-2xl bg-white">
-                <div class="w-20 h-[90px] flex shrink-0 rounded-2xl overflow-hidden">
-                    <img src="assets/images/thumbnails/th6.png" class="w-full h-full object-cover" alt="thumbnail">
-                </div>
-                <div class="flex flex-col gap-1">
-                    <p class="font-bold line-clamp-1 hover:line-clamp-none">Buku Edukasi Peduli Anak lorem ipsum</p>
-                    <p class="text-xs leading-[18px]">Target <span class="font-bold text-[#FF7815]">Rp 800.000.000</span></p>
-                    <div class="flex items-center gap-1 sm:flex-row-reverse sm:justify-end">
-                        <p class="font-semibold sm:font-medium text-xs leading-[18px]">Putra Bangsa</p>
-                        <div class="flex shrink-0">
-                            <img src="assets/images/icons/tick-circle.svg" alt="icon">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </a>
-        <a href="details.html" class="card">
-            <div class="w-full flex items-center p-[14px] gap-3 rounded-2xl bg-white">
-                <div class="w-20 h-[90px] flex shrink-0 rounded-2xl overflow-hidden">
-                    <img src="assets/images/thumbnails/th5.png" class="w-full h-full object-cover" alt="thumbnail">
-                </div>
-                <div class="flex flex-col gap-1">
-                    <p class="font-bold line-clamp-1 hover:line-clamp-none">Operasi Ginjal Kanan</p>
-                    <p class="text-xs leading-[18px]">Target <span class="font-bold text-[#FF7815]">Rp 55.000.000</span></p>
-                    <div class="flex items-center gap-1 sm:flex-row-reverse sm:justify-end">
-                        <p class="font-semibold sm:font-medium text-xs leading-[18px]">Putra Bangsa</p>
-                        <div class="flex shrink-0">
-                            <img src="assets/images/icons/tick-circle.svg" alt="icon">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </a>
-        <a href="details.html" class="card">
-            <div class="w-full flex items-center p-[14px] gap-3 rounded-2xl bg-white">
-                <div class="w-20 h-[90px] flex shrink-0 rounded-2xl overflow-hidden">
-                    <img src="assets/images/thumbnails/th7.png" class="w-full h-full object-cover" alt="thumbnail">
-                </div>
-                <div class="flex flex-col gap-1">
-                    <p class="font-bold line-clamp-1 hover:line-clamp-none">Buku Edukasi Peduli Anak lorem ipsum</p>
-                    <p class="text-xs leading-[18px]">Target <span class="font-bold text-[#FF7815]">Rp 800.000.000</span></p>
-                    <div class="flex items-center gap-1 sm:flex-row-reverse sm:justify-end">
-                        <p class="font-semibold sm:font-medium text-xs leading-[18px]">Putra Bangsa</p>
-                        <div class="flex shrink-0">
-                            <img src="assets/images/icons/tick-circle.svg" alt="icon">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </a>
-        <a href="details.html" class="card">
-            <div class="w-full flex items-center p-[14px] gap-3 rounded-2xl bg-white">
-                <div class="w-20 h-[90px] flex shrink-0 rounded-2xl overflow-hidden">
-                    <img src="assets/images/thumbnails/th4.png" class="w-full h-full object-cover" alt="thumbnail">
-                </div>
-                <div class="flex flex-col gap-1">
-                    <p class="font-bold line-clamp-1 hover:line-clamp-none">Bangun Desa Angga</p>
-                    <p class="text-xs leading-[18px]">Target <span class="font-bold text-[#FF7815]">Rp 18.500.000.000</span></p>
-                    <div class="flex items-center gap-1 sm:flex-row-reverse sm:justify-end">
-                        <p class="font-semibold sm:font-medium text-xs leading-[18px]">Putra Bangsa</p>
-                        <div class="flex shrink-0">
-                            <img src="assets/images/icons/tick-circle.svg" alt="icon">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </a>
-        <a href="details.html" class="card">
-            <div class="w-full flex items-center p-[14px] gap-3 rounded-2xl bg-white">
-                <div class="w-20 h-[90px] flex shrink-0 rounded-2xl overflow-hidden">
-                    <img src="assets/images/thumbnails/th6.png" class="w-full h-full object-cover" alt="thumbnail">
-                </div>
-                <div class="flex flex-col gap-1">
-                    <p class="font-bold line-clamp-1 hover:line-clamp-none">Buku Edukasi Peduli Anak lorem ipsum</p>
-                    <p class="text-xs leading-[18px]">Target <span class="font-bold text-[#FF7815]">Rp 800.000.000</span></p>
-                    <div class="flex items-center gap-1 sm:flex-row-reverse sm:justify-end">
-                        <p class="font-semibold sm:font-medium text-xs leading-[18px]">Putra Bangsa</p>
-                        <div class="flex shrink-0">
-                            <img src="assets/images/icons/tick-circle.svg" alt="icon">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </a>
+        @empty
+        <p>belum ada fundraising dalam categoy ini</p>
+        @endforelse
+        
     </div>
 </section>
 

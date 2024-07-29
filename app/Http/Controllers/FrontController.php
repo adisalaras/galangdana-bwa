@@ -26,4 +26,12 @@ class FrontController extends Controller
         return view('front.views.category', compact('category'));
     }
 
+    public function details(Fundraising $fundraising){
+        $goalReached = $fundraising->totalReachedAmount() >= $fundraising->target_amount;
+
+        //ambil di model fundraising->method totalreachedAmount
+
+        return view('front.views.details', compact('fundraising'));
+    }
+
 }
