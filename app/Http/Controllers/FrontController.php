@@ -31,7 +31,11 @@ class FrontController extends Controller
 
         //ambil di model fundraising->method totalreachedAmount
 
-        return view('front.views.details', compact('fundraising'));
+        return view('front.views.details', compact('fundraising','goalReached'));
+    }
+
+    public function support(Fundraising $fundraising){
+        return view('front.views.donation', compact('fundraising'));
     }
 
 }

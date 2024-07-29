@@ -85,7 +85,7 @@
                 <a href="{{ route('front.details', $fundraising) }}" class="card">
                     <div class="w-full border border-[#E8E9EE] flex items-center p-[14px] gap-3 rounded-2xl bg-white">
                         <div class="w-20 h-[90px] flex shrink-0 rounded-2xl overflow-hidden">
-                            <img src="{{ asset('assets/images/thumbnails/th5.png') }}" class="w-full h-full object-cover" alt="thumbnail">
+                            <img src="{{ Storage::url($fundraising->thumbnail) }}" class="w-full h-full object-cover" alt="thumbnail">
                         </div>
                         <div class="flex flex-col gap-1">
                             <p class="font-bold line-clamp-1 hover:line-clamp-none">{{ $fundraising->name }}</p>
