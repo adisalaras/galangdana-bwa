@@ -27,7 +27,7 @@ Route::get('/support/{fundraising:slug}', [FrontController::class, 'support'])->
 
 Route::get('/checkout/{fundraising:slug}/{totalAmountDonation}', [FrontController::class, 'checkout'])->name('front.checkout');
 
-Route::get('/checkout/store/{fundraising:slug}/{totalAmountDonation}', [FrontController::class, 'store'])->name('front.store');
+Route::post('/checkout/store/{fundraising:slug}/{totalAmountDonation}', [FrontController::class, 'store'])->name('front.store');
 
 // Route::get('/dashboard', function () {
 //     return view('dashboard');
