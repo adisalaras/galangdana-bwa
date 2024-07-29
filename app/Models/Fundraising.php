@@ -36,6 +36,9 @@ class Fundraising extends Model
     public function widrawals(){
         return $this->hasMany(FundraisingWithdrawal::class);
     }
+    public function fundraising_phases(){
+        return $this->hasMany(FundraisingPhase::class);
+    }
     
     public function getPercentageAttribute(){
         $totalDonations = $this->totalReachedAmount();
