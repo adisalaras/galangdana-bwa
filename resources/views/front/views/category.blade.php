@@ -19,7 +19,7 @@
             </a>
         </nav>
         <div class="mt-5">
-            <h1 class="font-bold text-[26px] leading-[39px] text-white text-center">Natural Disasters</h1>
+            <h1 class="font-bold text-[26px] leading-[39px] text-white text-center">{{ $category->name }}</h1>
         </div>
     </div>
     <div class="flex flex-col gap-4 px-4">

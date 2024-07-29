@@ -37,10 +37,15 @@ class Fundraising extends Model
         return $this->hasMany(FundraisingWithdrawal::class);
     }
     
-
-    // public function phases(){
-    //     return $this->belongsTo(FundraishingPhase::class);
-    // }
+    public function getPercentageAttribute(){
+        $totalDonations = $this->totalReachedAmount();
+        if($this->target_amount > 0){
+            $percentage = ($totalDonations/ $this->target_amount) *100;
+            return $percentage > 100 ? 100 : $percentage;
+            //return jika pecentage lebih dri 100= nilainya akan tetap 100, jika kurang maka akan menampilkan jumlah percentage
+        }
+        return 0;
+    }
     
     
 }
